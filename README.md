@@ -13,6 +13,7 @@ DATABASE_URL=mysql://юзер:пароль@127.0.0.1:3306/названиеБД?s
 ```bash
 composer update
 ```
+Запускаем MySQL<br/>
 Далее создаем БД через команду 
 ```bash
 php bin/console doctrine:database:create
@@ -21,7 +22,7 @@ php bin/console doctrine:database:create
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
-Запускаем MySQL<br/>
+
 Запускаем сайт через symfony
 ```bash
 symfony server:start
