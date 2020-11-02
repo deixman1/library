@@ -11,7 +11,7 @@ DATABASE_URL=mysql://юзер:пароль@127.0.0.1:3306/названиеБД?s
 
 Через терминал в корне выполняем 
 ```bash
-composer update
+composer install
 ```
 Запускаем MySQL<br/>
 Далее создаем БД через команду 
