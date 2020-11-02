@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 
 class BooksController extends AbstractController
 {
-    private function getForm(object $books): FormInterface
+    private function getForm($books)
     {
         return $this->createFormBuilder($books)
             ->setMethod('GET')
