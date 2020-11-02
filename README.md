@@ -21,7 +21,7 @@ php bin/console doctrine:database:create
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
-Запускаем MySQL
+Запускаем MySQL<br/>
 Запускаем сайт через symfony
 ```bash
 symfony server:start
