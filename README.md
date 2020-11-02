@@ -18,7 +18,7 @@ composer update
 ```bash
 php bin/console doctrine:database:create
 ```
-Выполняю миграцию
+Выполняем миграцию
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
