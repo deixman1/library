@@ -22,6 +22,11 @@ php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 ```
 
+Добавить книги в БД
+```
+symfony console doctrine:fixtures:load
+```
+
 Запускаем сайт через symfony
 ```bash
 symfony server:start
@@ -30,10 +35,7 @@ symfony server:start
 Ура! Сайт запущен
 http://localhost:8000/
 
-Добавить книги в БД
-```
-symfony console doctrine:fixtures:load
-```
+
 <br>
 <br>
 <br>
