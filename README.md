@@ -29,6 +29,11 @@ symfony server:start
 
 Ура! Сайт запущен
 http://localhost:8000/
+
+Добавить книги в БД
+```
+symfony console doctrine:fixtures:load
+```
 <br>
 <br>
 <br>
