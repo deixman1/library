@@ -77,7 +77,11 @@ class Books
 
         return $this;
     }
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    /**
+     * @param ClassMetadata $metadata
+     * @return ClassMetadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata): ClassMetadata
     {
         $metadata->addGetterConstraint((string)'Name', new Assert\NotBlank([
             'message' => 'Поле Название не должно быть пустым',
@@ -92,5 +96,6 @@ class Books
             "maxMessage" => "Длина Года должна быть 4 символа",
             "allowEmptyString" => false
         ]));
+        return $metadata;
     }
 }

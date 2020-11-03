@@ -8,7 +8,7 @@ use App\Entity\Books;
 
 class AppFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): ObjectManager
     {
         $book_one = new Books();
         $book_two = new Books();
@@ -30,5 +30,6 @@ class AppFixtures extends Fixture
         $manager->persist($book_three);
 
         $manager->flush();
+        return $manager;
     }
 }

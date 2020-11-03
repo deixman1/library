@@ -15,10 +15,11 @@ class BooksType extends AbstractType
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
+     * @return FormBuilderInterface
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): FormBuilderInterface
     {
-        $builder
+        return $builder
             ->setMethod('GET')
             ->add('name', TextType::class, ['label' => 'Название книги'])
             ->add('author', TextType::class, ['label' => 'Автор книги'])
@@ -26,9 +27,13 @@ class BooksType extends AbstractType
             ->add('submit', SubmitType::class, ['label' => 'Сохранить'])
         ;
     }
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     * @return OptionsResolver
+     */
+    public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
-        $resolver->setDefaults([
+        return $resolver->setDefaults([
             'data_class' => Books::class,
         ]);
     }
