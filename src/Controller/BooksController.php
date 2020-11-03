@@ -3,32 +3,17 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Books;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\BooksRepository;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Forms;
-use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
+use App\Form\BooksType;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 
 class BooksController extends AbstractController
 {
-    private function getForm(object $books): FormInterface
-    {
-        return $this->createFormBuilder($books)
-            ->setMethod('GET')
-            ->add('name', TextType::class, ['label' => 'Название книги'])
-            ->add('author', TextType::class, ['label' => 'Автор книги'])
-            ->add('year_published', IntegerType::class, ['label' => 'Год издания книги'])
-            ->getForm();
-    }
-
     /**
      * @Route("/add_book", name="add_book")
      * @param Request $request
@@ -36,9 +21,8 @@ class BooksController extends AbstractController
      */
     public function addBook(Request $request): Response
     {
-        $book = new Books;
-        $form = $this->getForm($book);
-
+        $book = new Books();
+        $form = $this->createForm(BooksType::class, $book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
@@ -51,12 +35,12 @@ class BooksController extends AbstractController
 
             return $this->render('books/add_book.html.twig', [
                 'form' => $form->createView(),
-                'error' => "Книга добавлена"
+                'success' => "Книга добавлена"
             ]);
         }
         return $this->render('books/add_book.html.twig', [
             'form' => $form->createView(),
-            'error' => ""
+            'success' => ""
         ]);
 
     }
@@ -71,23 +55,19 @@ class BooksController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $book = $entityManager->getRepository(Books::class)->find($id);
-        $form = $this->getForm($book);
+        $form = $this->createForm(BooksType::class, $book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
-            $data = $form->getData();
-            $book->setName($data->getName());
-            $book->setAuthor($data->getAuthor());
-            $book->setYearPublished($data->getYearPublished());
             $entityManager->flush();
             return $this->render('books/add_book.html.twig', [
                 'form' => $form->createView(),
-                'error' => "Книга изменена"
+                'success' => "Книга изменена"
             ]);
         }
         return $this->render('books/add_book.html.twig', [
             'form' => $form->createView(),
-            'error' => ""
+            'success' => ""
         ]);
     }
     /**

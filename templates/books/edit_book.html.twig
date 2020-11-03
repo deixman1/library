@@ -11,15 +11,7 @@
 <div class="example-wrapper">
     <h2><a href="/">На главную</a></h2>
     <h1>Редактирование книги</h1>
-    {{ form_start(form) }}<br>
-    <h2 style="color: red">{{ error }}</h2>
-    {{ form_row(form.name) }}
-    {{ form_errors(form.name) }}
-    {{ form_row(form.author) }}
-    {{ form_errors(form.author) }}
-    {{ form_row(form.year_published) }}
-    {{ form_errors(form.year_published) }}
-    <input style="padding: 10px" type = "submit" name = "submit" value = "Изменить">
-    {{ form_end(form) }}
+    <h2 style="color: red">{{ success }}</h2>
+    {{ form(form) }}
 </div>
 {% endblock %}

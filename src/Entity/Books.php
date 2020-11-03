@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BooksRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * @ORM\Entity(repositoryClass=BooksRepository::class)
@@ -19,35 +20,22 @@ class Books
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Поле название не должно быть пустым")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Поле название должно быть словом!"
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Поле автор не должно быть пустым")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Поле автор должно быть словом!"
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      */
     private $author;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Поле год  не должно быть пустым")
-     * @Assert\Type(
-     *     type="integer",
-     *     message="Поле год должно быть числом!"
-     * )
-     * @Assert\Length(min=4)
+     * @ORM\Column(type="integer", nullable=true)
+     *
      */
-    private $year_published;
+    private $year;
 
     public function getId(): ?int
     {
@@ -59,7 +47,7 @@ class Books
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name = null): self
     {
         $this->name = $name;
 
@@ -71,22 +59,38 @@ class Books
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(string $author = null): self
     {
         $this->author = $author;
 
         return $this;
     }
 
-    public function getYearPublished(): ?int
+    public function getYear(): ?int
     {
-        return $this->year_published;
+        return $this->year;
     }
 
-    public function setYearPublished(int $year_published): self
+    public function setYear(int $year = null): self
     {
-        $this->year_published = $year_published;
+        $this->year = $year;
 
         return $this;
+    }
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addGetterConstraint((string)'Name', new Assert\NotBlank([
+            'message' => 'Поле Название не должно быть пустым',
+        ]));
+        $metadata->addGetterConstraint((string)'Author', new Assert\NotBlank([
+            'message' => 'Поле Автор не должно быть пустым',
+        ]));
+        $metadata->addGetterConstraint((string)'Year', new Assert\Length([
+            "min" => 4,
+            "max" => 4,
+            "minMessage" => "Длина Года должна быть 4 символа",
+            "maxMessage" => "Длина Года должна быть 4 символа",
+            "allowEmptyString" => false
+        ]));
     }
 }
