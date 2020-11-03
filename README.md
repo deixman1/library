@@ -29,8 +29,8 @@ symfony server:start
 
 Ура! Сайт запущен
 http://localhost:8000/
-
-# Вкатывание в symfony день 2
+<br><br>
+# Вкатывание в symfony: день 2
 ----------------
 - в инструкции измнено с `composer update` на `composer install`
 - `composer.json` очищен от лишних пакетов переходом с `traditional web application` на `microservice Symfony`
