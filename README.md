@@ -1,3 +1,5 @@
+# База хранения краткого описания книги
+----------------
 # Установка
 ----------------
 - Скачиваем, устанавливаем [symfony](https://symfony.com/download)
@@ -39,12 +41,3 @@ http://localhost:8000/
 <br>
 <br>
 <br>
-
-Памятка
-----------------
-- в инструкции измнено с `composer update` на `composer install`
-- `composer.json` очищен от лишних пакетов переходом с `traditional web application` на `microservice Symfony`
-- форма symfony вынесена отдельно в `Form/BooksType.php`
-- `Repository` очищен от сгенерированного кода
-- добавлены тест фикстуры и GET запроса
-- изменена схема бд
